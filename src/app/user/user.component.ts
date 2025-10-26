@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
-import { DUMMY_USERS } from '../dummy-users';
 
 //define type or use an interface
 //type User = { name: string; id: string; avatar: string };
