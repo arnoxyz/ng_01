@@ -1,6 +1,7 @@
 import { Component, Input, input } from '@angular/core';
 import { TaskComponent } from '../task/task.component';
 import { dummyTasks } from '../dummy-tasks';
+import { User } from '../user.interface';
 
 @Component({
   selector: 'app-tasks',
@@ -10,7 +11,8 @@ import { dummyTasks } from '../dummy-tasks';
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
-  @Input() name?: string;
+  @Input() user!: User;
 
+  //TODO: Filter tasks for specific user
   tasks = dummyTasks;
 }
