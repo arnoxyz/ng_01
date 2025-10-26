@@ -13,6 +13,7 @@ import { User } from '../user.interface';
 export class UserComponent {
   //with no signals: using @Input
   @Input({ required: true }) user!: User;
+  @Input({ required: true }) selected!: boolean;
   @Output() select = new EventEmitter();
 
   get imagePath() {
