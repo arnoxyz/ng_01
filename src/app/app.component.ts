@@ -22,7 +22,7 @@ export class AppComponent {
   }
 
   onSelectUser(id: string) {
-    console.log('user with id was clicked id=: ' + id);
+    //console.log('user with id was clicked id=: ' + id);
     this.selectedUserId = id;
   }
 }
