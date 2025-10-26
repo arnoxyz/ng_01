@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { User } from '../user.interface';
+import { AddTaskComponent } from "../tasks/add-task/add-task.component";
+import { CardComponent } from "../ui/card/card.component";
 
 //define type or use an interface
 //type User = { name: string; id: string; avatar: string };
@@ -9,6 +11,7 @@ import { User } from '../user.interface';
   standalone: true,
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
+  imports: [CardComponent],
 })
 export class UserComponent {
   //with no signals: using @Input
