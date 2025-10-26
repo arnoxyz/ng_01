@@ -3,6 +3,7 @@ import { TaskComponent } from './task/task.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { type User } from '../user.interface';
 import { type NewTaskData } from '../task.interface';
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -15,63 +16,27 @@ export class TasksComponent {
   @Input() user!: User;
   isAddingTask = false;
 
+  // -> use dependency injection (specify dependency in constructor)
+  /*
+  private tasksService = new TasksService();
+  constructor(tasksService: TasksService) {
+    this.tasksService = tasksService;
+  }
+  */
+
+  //or shortcut for dependency injection
+  constructor(private tasksService: TasksService) {}
+
   //Filter tasks for specific user -> done with getter (or in signals a computed value )
   get selectedUserTasks() {
-    return this.tasks.filter((task) => task.userId === this.user.id);
-  }
-
-  onCompleteTask(taskId: string) {
-    //find and delete task from list
-    this.tasks = this.tasks.filter((task) => task.id !== taskId);
+    return this.tasksService.getSelectedUserTasks(this.user.id);
   }
 
   onStartAddTask() {
     this.isAddingTask = true;
   }
 
-  onCancelAddTask() {
+  onCloseAddTask() {
     this.isAddingTask = false;
   }
-
-  onAddTask(data: NewTaskData) {
-    //add new element
-
-    //unshift() -> inserts data at the beginning
-    //push() -> inserts data at the end
-    this.tasks.unshift({
-      id: new Date().getTime().toString(),
-      userId: this.user.id,
-      title: data.title,
-      summary: data.summary,
-      dueDate: data.date,
-    });
-
-    this.isAddingTask = false;
-  }
-
-  tasks = [
-    {
-      id: 't1',
-      userId: 'u1',
-      title: 'Master Angular',
-      summary:
-        'Learn all the basic and advanced features of Angular & how to apply them.',
-      dueDate: '2025-12-31',
-    },
-    {
-      id: 't2',
-      userId: 'u3',
-      title: 'Build first prototype',
-      summary: 'Build a first prototype of the online shop website',
-      dueDate: '2024-05-31',
-    },
-    {
-      id: 't3',
-      userId: 'u3',
-      title: 'Prepare issue template',
-      summary:
-        'Prepare and describe an issue template which will help with project management',
-      dueDate: '2024-06-15',
-    },
-  ];
 }
