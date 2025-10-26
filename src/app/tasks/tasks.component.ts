@@ -13,6 +13,10 @@ import { User } from '../user.interface';
 export class TasksComponent {
   @Input() user!: User;
 
-  //TODO: Filter tasks for specific user
+  //Filter tasks for specific user -> done with getter (or in signals a computed value )
+  get selectedUserTasks() {
+    return this.tasks.filter((task) => task.userId === this.user.id);
+  }
+
   tasks = dummyTasks;
 }
